@@ -10,7 +10,7 @@ load_dotenv(override=True)
 API_KEY = os.getenv("GEMINI_API_KEY")
 
 if not API_KEY:
-    raise Exception("API key not set, set your GEMINI_API_KEY in environment variables")
+    raise Exception("API key not set, set your GEMINI_API_KEY")
 
 parser = argparse.ArgumentParser(description="Kick - Coding Agent")
 parser.add_argument("prompt", type=str, help="Prompt for the agent")
@@ -21,9 +21,9 @@ args = parser.parse_args()
 
 def generate_content(client: genai.Client, messages: List[types.Content]) -> None:
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=messages,
+        model="gemini-2.5-flash", contents=messages
     )
+
     if args.verbose:
         if response.usage_metadata is not None:
             print(f"Prompt: {messages[0].parts[0].text}")
