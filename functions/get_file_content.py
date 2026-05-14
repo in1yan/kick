@@ -1,5 +1,9 @@
 import os
-from config import Config
+
+# from config import Config
+from google.genai import types
+
+MAX_CHARS = 10000
 
 
 def get_file_content(working_dir, file_path):
@@ -18,9 +22,27 @@ def get_file_content(working_dir, file_path):
             return f'Error: file "{file_path}" is not a file'
         content = ""
         with open(target_file, "r") as f:
-            content = f.read(Config.MAX_CHARS)
+            content = f.read(MAX_CHARS)
             if f.read(1):
-                content += f'\n[...File "{file_path}" truncated at {Config.MAX_CHARS} characters]'
+                content += (
+                    f'\n[...File "{file_path}" truncated at {MAX_CHARS} characters]'
+                )
         return content
     except Exception:
         return "Error: Cannot open or read the file"
+
+
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Get the content of the file within the working directory , the output will be terminated if the file size is large",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="path of the file to be read. it should be relative to the working directory.",
+            )
+        },
+        required=["file_path"],
+    ),
+)

@@ -1,6 +1,8 @@
+from distro import name
 import os
 import sys
 import subprocess
+from google.genai import types
 
 
 def run_python_file(working_dir, file_path, args=None):
@@ -39,3 +41,23 @@ def run_python_file(working_dir, file_path, args=None):
         return output
     except Exception as e:
         return f"Error: executing python file: {e}"
+
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Executes the give python file and returns the stdout and stderr",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="path of the file to be executed. it should be relative to the working directory.",
+            ),
+            "args": types.Schema(
+                type=types.Type.ARRAY,
+                items=types.Schema(type=types.Type.STRING),
+                description="The list of command line arguments needed by the give python file.",
+            ),
+        },
+    ),
+)

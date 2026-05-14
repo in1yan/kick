@@ -1,3 +1,4 @@
+from prompts import SYSTEM_PROMPT
 import argparse
 import os
 from typing import List
@@ -5,6 +6,7 @@ from typing import List
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from call_function import available_functions
 
 load_dotenv(override=True)
 API_KEY = os.getenv("GEMINI_API_KEY")
@@ -21,7 +23,11 @@ args = parser.parse_args()
 
 def generate_content(client: genai.Client, messages: List[types.Content]) -> None:
     response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=messages
+        model="gemini-2.5-flash",
+        contents=messages,
+        config=types.GenerateContentConfig(
+            tools=[available_functions], system_instruction=SYSTEM_PROMPT
+        ),
     )
 
     if args.verbose:
@@ -29,6 +35,9 @@ def generate_content(client: genai.Client, messages: List[types.Content]) -> Non
             print(f"Prompt: {messages[0].parts[0].text}")
             print(f"Prompt Tokens: {response.usage_metadata.prompt_token_count}")
             print(f"Response Tokens: {response.usage_metadata.candidates_token_count}")
+    if response.function_calls:
+        for call in response.function_calls:
+            print(f"Calling function: {call.name}({call.args})")
     print(f"Response: \n{response.text}")
 
 

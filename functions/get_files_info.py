@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 
 def get_files_info(working_dir, dir="."):
@@ -24,6 +25,20 @@ def get_files_info(working_dir, dir="."):
         )
     return "\n".join(file_info)
 
+
+schema_get_files_info = types.FunctionDeclaration(
+    name="get_files_info",
+    description="List the files in a specified directory within the working directory along with size and directory size",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "dir": types.Schema(
+                type=types.Type.STRING,
+                description="directory path to list files from, relative to the working directory (default is the working directory itself)",
+            )
+        },
+    ),
+)
 
 if __name__ == "__main__":
     print(get_files_info("../examples", dir="."))
