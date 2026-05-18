@@ -59,7 +59,8 @@ def generate_content(
         # print(f"Response: \n{response.text}")
     if response.candidates:
         for candidate in response.candidates:
-            messages.append(candidate.content)
+            if candidate.content:
+                messages.append(candidate.content)
     for function_call in function_results:
         messages.append(types.Content(role="user", parts=[function_call]))
     return response, messages
