@@ -8,7 +8,7 @@ Kick is an simple coding agent that uses Google's Gemini AI to help with softwar
 - **Code Execution**: Run Python files and see their output
 - Supports verbose output to see the agent's token usage and tools calls.
 
-It currently supports prompting thourg command line args, so only single turn instructions can be given.
+It currently supports prompting thourgh command line args, so only single turn instructions can be given.
 - Yet to implement a tui for multi turn converstion support.
 
 ## Installation
@@ -31,7 +31,7 @@ uv run main.py "Your prompt here"
 For verbose output to see function calls and token usage:
 
 ```bash
-python main.py "Your prompt here" --verbose
+uv run main.py "Your prompt here" --verbose
 ```
 
 ## How It Works
