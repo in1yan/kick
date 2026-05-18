@@ -42,7 +42,8 @@ def generate_content(
     function_results = []
     if response.function_calls:
         for call in response.function_calls:
-            print(f"Calling function: {call.name}({call.args})")
+            if args.verbose:
+                print(f"Calling function: {call.name}({call.args})")
             function_result = call_function(call)
             if not function_result.parts:
                 raise Exception("The parts of the function call is empty")
@@ -70,5 +71,5 @@ if __name__ == "__main__":
     for _ in range(20):
         resp, messages = generate_content(client, messages)
         if not resp.function_calls:
-            print(f"Response: {resp.text}")
+            print(f"Response: \n{resp.text}")
             break
