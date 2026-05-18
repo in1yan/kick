@@ -1,6 +1,6 @@
 # KICK - Coding Agent
 
-Kick is an simple coding agent that uses Google's Gemini AI to help with software engineering tasks. It can read, write, and run code.
+Kick is an simple coding agent that uses Google's Gemini. It can read, write, and run code.
 
 ## Features
 
