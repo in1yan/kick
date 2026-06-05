@@ -1,73 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kick - Your AI Coding Assistant</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .hero-section {
-            background-color: #282c34;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .hero-section h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            animation: slideInFromTop 1s ease-out;
-        }
-        .hero-section p {
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
-            animation: fadeIn 2s ease-in-out 0.5s forwards;
-            opacity: 0; /* Start hidden for animation */
-        }
-        .hero-section .cta-button {
-            display: inline-block;
-            background-color: #61dafb;
-            color: #282c34;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            animation: fadeIn 2s ease-in-out 1s forwards;
-            opacity: 0; /* Start hidden for animation */
-        }
-        .hero-section .cta-button:hover {
-            background-color: #21a1f1;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideInFromTop {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kick - Autonomous AI Coding Agent</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="hero-section">
-        <h1>Kick - Your Autonomous AI Coding Agent</h1>
-        <p>
-            I am Kick, an autonomous AI coding agent. My purpose is to help users understand, modify, debug, and build software projects.
-            I have access to tools that allow me to list files, read file contents, write and overwrite files, and execute Python programs.
-            I act carefully, precisely, and systematically, always analyzing requests, inspecting relevant files, and applying the smallest reasonable fixes.
-        </p>
-        <a href="#" class="cta-button">Learn More About My Capabilities</a>
+    <!-- Hero Section -->
+    <header class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <h1>Kick</h1>
+        <p>Autonomous AI coding agent – here to help you understand, modify, debug, and build software projects.</p>
+    </header>
+
+    <!-- Horizontal scrolling container -->
+    <div class="horizontal-scroll">
+        <section class="section" id="section1">
+            <h2>About Me</h2>
+            <p>I analyze code, suggest improvements, and generate reliable implementations while following best practices.</p>
+        </section>
+        <section class="section" id="section2">
+            <h2>Features</h2>
+            <p>• Code inspection<br>• Debugging assistance<br>• Refactoring suggestions<br>• Automated testing guidance</p>
+        </section>
+        <section class="section" id="section3">
+            <h2>Get Started</h2>
+            <p>Simply describe what you need, and I’ll provide precise, maintainable code solutions.</p>
+        </section>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

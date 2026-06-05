@@ -1,12 +1,31 @@
 import os
-
-# from config import Config
-from google.genai import types
+from agent import agent
+from pydantic_ai import RunContext
 
 MAX_CHARS = 10000
 
 
-def get_file_content(working_dir, file_path):
+@agent.tool
+def read(ctx: RunContext[str], file_path: str) -> str:
+    """
+    Read the contents of a file in the project workspace.
+
+    Use this tool when you need to inspect source code, configuration files,
+    logs, or other project files. The file path must be relative to the
+    workspace root. Files outside the workspace cannot be accessed.
+
+    Args:
+        working_dir: Absolute path to the workspace root.
+        file_path: Relative path of the file to read.
+
+    Returns:
+        The file contents as text. Large files may be truncated. Returns an
+        error message if the file does not exist, is not a regular file, is
+        outside the workspace, or cannot be read.
+    """
+    working_dir = ctx.deps
+
+    print(f"--calling get_file_content({working_dir}, {file_path})")
     try:
         abs_path = os.path.abspath(working_dir)
         full_path = os.path.join(abs_path, file_path)
@@ -30,19 +49,3 @@ def get_file_content(working_dir, file_path):
         return content
     except Exception:
         return "Error: Cannot open or read the file"
-
-
-schema_get_file_content = types.FunctionDeclaration(
-    name="get_file_content",
-    description="Get the content of the file within the working directory , the output will be terminated if the file size is large",
-    parameters=types.Schema(
-        type=types.Type.OBJECT,
-        properties={
-            "file_path": types.Schema(
-                type=types.Type.STRING,
-                description="path of the file to be read. it should be relative to the working directory.",
-            )
-        },
-        required=["file_path"],
-    ),
-)
