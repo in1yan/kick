@@ -1,7 +1,7 @@
-from get_file_content import get_file_content
+from read import read
 
-print(get_file_content("../examples/calculator", "lorem.txt"))
-print(get_file_content("../examples/calculator", "main.py"))
-print(get_file_content("../examples/calculator", "pkg/calculator.py"))
-print(get_file_content("../examples/calculator", "/bin/cat"))
-print(get_file_content("../examples/calculator", "pkg/not_found.py"))
+print(read("../examples/calculator", "lorem.txt"))
+print(read("../examples/calculator", "main.py"))
+print(read("../examples/calculator", "pkg/calculator.py"))
+print(read("../examples/calculator", "/bin/cat"))
+print(read("../examples/calculator", "pkg/not_found.py"))
