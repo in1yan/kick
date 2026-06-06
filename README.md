@@ -1,22 +1,19 @@
 # KICK - Coding Agent
 
-Kick is an simple coding agent that uses Google's Gemini. It can read, write, and run code.
+Kick is an simple coding agent that uses pydantic ai. It can read, write, and edit code.
 <img width="400" height="225" alt="Screen Recording 2026-05-18 184310" src="https://github.com/user-attachments/assets/11fa0c41-5fda-4f71-8c71-7724b3e7e604" />
 
 ## Features
 
-- **File Operations**: Read, write, and get information about files in the workspace
-- **Code Execution**: Run Python files and see their output
-- Supports verbose output to see the agent's token usage and tools calls.
-
-It currently supports prompting thourgh command line args, so only single turn instructions can be given.
-- Yet to implement a tui for multi turn converstion support.
+- **File Operations**: Read, write, edit and list files in the workspace
+- supports multiple providers
 
 ## Installation
 
 1. Clone the repository
 2. Install dependencies: `uv sync`
-3. Set your Gemini API key:
+3. Set your api key:
+ example:
    ```
    GEMINI_API_KEY=your_api_key_here
    ```
@@ -29,18 +26,18 @@ Run the agent with a prompt:
 uv run main.py "Your prompt here"
 ```
 
-For verbose output to see function calls and token usage:
+Run the agent in multiturn conversation:
 
 ```bash
-uv run main.py "Your prompt here" --verbose
+uv run main.py
 ```
 
 ## How It Works
 
-The agent uses gemini models to call several functions which will help the llm to interact with the file system.
-- `get_file_content`: Read file contents
-- `get_files_info`: List files and directories
-- `write_file`: Create or modify files
-- `run_python_file`: Execute Python scripts
+The agent uses ai models to call several functions which will help the llm to interact with the file system.
+- `read`: Read file contents
+- `ls`: List files and directories
+- `write`: Create or modify files
+- `edit`: edit a file
 
 > Note: This is a learning project with a simple implementation, Not recommended to use for serious stuff.
