@@ -66,34 +66,23 @@ loop();
 
 // --- Horizontal scrolling with vertical wheel ---
 // Translate vertical wheel movements (deltaY) into horizontal scrolling of the
-// .horizontal-scroll container. The listener is attached to the container so the
-// effect only applies when the pointer is over the scrolling area, and we allow
-// normal vertical scrolling when horizontal scrolling is no longer possible.
-const horizontalContainer = document.querySelector('.horizontal-scroll');
-if (horizontalContainer) {
-  horizontalContainer.addEventListener(
-    'wheel',
-    (e) => {
-      // Only act when the container actually overflows horizontally
-      if (horizontalContainer.scrollWidth <= horizontalContainer.clientWidth) return;
-      // We only care about vertical wheel motion
-      if (e.deltaY === 0) return;
+// .horizontal-scroll container. This listener is attached to the window so
+// vertical scrolling anywhere on the page will move the container horizontally
+// when possible.
+window.addEventListener('wheel', (e) => {
+  if (e.deltaY === 0) return;
+  const container = document.querySelector('.horizontal-scroll');
+  if (!container) return;
+  // Only act when the container overflows horizontally
+  if (container.scrollWidth <= container.clientWidth) return;
 
-      // Determine if we can scroll further in the direction of deltaY
-      const canScrollRight =
-        e.deltaY > 0 &&
-        horizontalContainer.scrollLeft + horizontalContainer.clientWidth <
-          horizontalContainer.scrollWidth;
-      const canScrollLeft = e.deltaY < 0 && horizontalContainer.scrollLeft > 0;
+  const canScrollRight =
+    e.deltaY > 0 &&
+    container.scrollLeft + container.clientWidth < container.scrollWidth;
+  const canScrollLeft = e.deltaY < 0 && container.scrollLeft > 0;
 
-      if (canScrollRight || canScrollLeft) {
-        // Prevent the default vertical scroll when we can scroll horizontally
-        e.preventDefault();
-        // Scroll the container horizontally – preserve the sign of deltaY
-        horizontalContainer.scrollLeft += e.deltaY;
-      }
-      // If we cannot scroll further horizontally, let the page scroll vertically.
-    },
-    { passive: false }
-  );
-}
+  if (canScrollRight || canScrollLeft) {
+    e.preventDefault();
+    container.scrollLeft += e.deltaY;
+  }
+}, { passive: false });
