@@ -1,6 +1,7 @@
 # KICK - Coding Agent
 
 Kick is an simple coding agent that uses Google's Gemini. It can read, write, and run code.
+<img width="400" height="225" alt="Screen Recording 2026-05-18 184310" src="https://github.com/user-attachments/assets/11fa0c41-5fda-4f71-8c71-7724b3e7e604" />
 
 ## Features
 
