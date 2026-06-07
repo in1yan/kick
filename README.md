@@ -13,11 +13,20 @@ Kick is an simple coding agent that uses pydantic ai. It can read, write, and ed
 1. Clone the repository
 2. Install dependencies: `uv sync`
 3. Set your api key:
+
  example:
+
    ```
    GEMINI_API_KEY=your_api_key_here
    ```
+4. setup a model:
 
+    example:
+    ```
+
+    MODEL=groq:openai/gpt-oss-120b   
+    ```
+    ```
 ## Usage
 
 Run the agent with a prompt:
