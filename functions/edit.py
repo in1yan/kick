@@ -43,7 +43,7 @@ def edit(ctx: RunContext[str], file_path: str, old_string: str, new_string: str)
         return f'Error: Cannot edit "{file_path}" as it is a directory'
     content = ""
     new_content = ""
-    with open(target_path, "r") as file:
+    with open(target_path, "r", encoding="utf-8") as file:
         content = file.read()
         start = content.find(old_string)
         if content.count(old_string) > 1:
@@ -53,7 +53,7 @@ def edit(ctx: RunContext[str], file_path: str, old_string: str, new_string: str)
         end = start + len(old_string)
 
         new_content = content[:start] + new_string + content[end:]
-    with open(target_path, "w") as file:
+    with open(target_path, "w", encoding="utf-8") as file:
         file.write(new_content)
     diff = "\n".join(
         list(

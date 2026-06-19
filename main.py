@@ -6,6 +6,7 @@ from functions.read import read
 from functions.ls import ls
 from functions.write import write
 from functions.edit import edit
+from functions.bash import bash
 from agent import agent
 
 
