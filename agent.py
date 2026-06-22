@@ -1,16 +1,19 @@
 from pydantic_ai import Agent
 from prompts import SYSTEM_PROMPT
-import os
-from dotenv import load_dotenv
+from config import config, load_config
 
-load_dotenv()
-MODEL = os.getenv("MODEL")
 
-if not MODEL:
-    raise Exception("Setup a proper Model")
+def create_agent(cf):
+    MODEL = cf.agent.model
 
-agent = Agent(
-    model=MODEL,
-    system_prompt=SYSTEM_PROMPT,
-    retries=3,
-)
+    if not MODEL:
+        raise Exception("Setup a proper Model")
+    agent = Agent(
+        model=MODEL,
+        system_prompt=SYSTEM_PROMPT,
+        retries=3,
+    )
+    return agent
+
+
+agent = create_agent(config)

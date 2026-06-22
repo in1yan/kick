@@ -9,11 +9,9 @@ from functions.edit import edit
 from functions.bash import bash
 from agent import agent
 
-
 parser = argparse.ArgumentParser(description="Kick - Coding Agent")
 parser.add_argument("prompt", type=str, nargs="?", help="Prompt for the agent")
 parser.add_argument("--verbose", action="store_true", help="Turn on verbose")
-
 args = parser.parse_args()
 
 
