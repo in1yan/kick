@@ -1,6 +1,6 @@
 import os
 
-from agent import agent
+from kick.agent import agent
 from pydantic_ai import RunContext
 import difflib
 

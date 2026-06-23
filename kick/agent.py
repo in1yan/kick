@@ -1,6 +1,6 @@
 from pydantic_ai import Agent
-from prompts import SYSTEM_PROMPT
-from config import config, load_config
+from kick.prompts import SYSTEM_PROMPT
+from kick.config import config
 
 
 def create_agent(cf):

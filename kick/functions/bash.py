@@ -1,6 +1,4 @@
-import os
-import subprocess
-from agent import agent
+from kick.agent import agent
 from pydantic_ai import RunContext
 import asyncio
 
