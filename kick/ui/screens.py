@@ -25,6 +25,17 @@ class ModelSelectionModal(ModalScreen[str]):
         event.stop()
         self.dismiss(event.value)
 
+    async def on_input_changed(self, event: Input.Changed):
+        query = event.value.lower()
+        list_view = self.query_one("#recent_models", ListView)
+        filtered_models = [
+            model for model in self.recent_models if query in model.lower()
+        ]
+        list_view.clear()
+
+        for model in filtered_models:
+            await list_view.append(ListItem(Label(model)))
+
     def on_list_view_selected(
         self,
         event: ListView.Selected,

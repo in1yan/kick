@@ -1,6 +1,5 @@
 from pydantic_ai import Agent, Tool
 from kick.prompts import SYSTEM_PROMPT
-from kick.config import config
 from kick.functions.bash import bash
 from kick.functions.edit import edit
 from kick.functions.ls import ls
