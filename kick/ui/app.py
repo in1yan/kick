@@ -45,19 +45,22 @@ class Kick(App):
     async def run_agent(self, prompt: str, message_widget: Spinner):
         response = ""
         first_chunk = True
-        async with self.agent.run_stream(
-            prompt,
-            deps=os.getcwd(),
-            message_history=self.message_history,
-        ) as stream:
-            self.current_stream = stream
-            async for chunk in stream.stream_text(delta=True):
-                if first_chunk:
-                    message_widget.stop()
-                    first_chunk = False
-                response += chunk
-                message_widget.update(f"### Kick\n\n{response}")
-            self.message_history = stream.all_messages()
+        try:
+            async with self.agent.run_stream(
+                prompt,
+                deps=os.getcwd(),
+                message_history=self.message_history,
+            ) as stream:
+                self.current_stream = stream
+                async for chunk in stream.stream_text(delta=True):
+                    if first_chunk:
+                        message_widget.stop()
+                        first_chunk = False
+                    response += chunk
+                    message_widget.update(f"### Kick\n\n{response}")
+                self.message_history = stream.all_messages()
+        except:
+            message_widget.update("> Encountered an error during generation ❌")
 
     async def on_input_submitted(self, event: Input.Submitted):
         if event.input.id != "prompt":
