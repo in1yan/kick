@@ -1,11 +1,9 @@
 import os
 
-from kick.agent import agent
 from pydantic_ai import RunContext
 import difflib
 
 
-@agent.tool
 def edit(ctx: RunContext[str], file_path: str, old_string: str, new_string: str) -> str:
     """
     Replace an exact text block in a file.

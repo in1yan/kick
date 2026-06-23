@@ -1,9 +1,7 @@
 import os
-from kick.agent import agent
 from pydantic_ai import RunContext
 
 
-@agent.tool
 def ls(ctx: RunContext[str], dir="."):
     """
     List files and directories in a workspace directory.

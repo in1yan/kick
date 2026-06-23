@@ -1,9 +1,7 @@
-from kick.agent import agent
 from pydantic_ai import RunContext
 import asyncio
 
 
-@agent.tool
 async def bash(ctx: RunContext[str], command: str, timeout: int = 30) -> str:
     """
     Execute a shell command in the workspace and return its output.

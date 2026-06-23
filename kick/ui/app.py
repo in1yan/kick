@@ -6,17 +6,15 @@ from textual.widgets import (
     Markdown,
 )
 import os
-from kick.functions.read import read
-from kick.functions.ls import ls
-from kick.functions.write import write
-from kick.functions.edit import edit
-from kick.functions.bash import bash
+
 from kick.config import config, write_config
-from kick.agent import agent
 from kick.ui.utils import switch_model
 from kick.ui.screens import ModelSelectionModal
 from kick.ui.widgets import Spinner, Welcome
 from kick.ui.providers import CommandProvider
+from kick.agent import create_agent
+
+agent = create_agent(config)
 
 
 class Kick(App):

@@ -1,11 +1,9 @@
 import os
-from kick.agent import agent
 from pydantic_ai import RunContext
 
 MAX_CHARS = 10000
 
 
-@agent.tool
 def read(ctx: RunContext[str], file_path: str) -> str:
     """
     Read the contents of a file in the project workspace.

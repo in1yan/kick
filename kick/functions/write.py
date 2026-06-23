@@ -1,9 +1,7 @@
 import os
-from kick.agent import agent
 from pydantic_ai import RunContext
 
 
-@agent.tool
 def write(ctx: RunContext[str], file_path, content):
     """
     Write content to a file in the workspace, creating parent directories if needed.
