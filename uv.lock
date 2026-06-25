@@ -1341,9 +1341,7 @@ name = "kick"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "google-genai" },
     { name = "pydantic-ai" },
-    { name = "python-dotenv" },
     { name = "textual", extra = ["syntax"] },
     { name = "textual-dev" },
     { name = "tomli-w" },
@@ -1351,9 +1349,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "google-genai", specifier = ">=2.0.1" },
     { name = "pydantic-ai", specifier = ">=1.105.0" },
-    { name = "python-dotenv", specifier = ">=1.2.2" },
     { name = "textual", extras = ["syntax"], specifier = ">=8.2.7" },
     { name = "textual-dev", specifier = ">=1.8.0" },
     { name = "tomli-w", specifier = ">=1.2.0" },

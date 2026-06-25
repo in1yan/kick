@@ -1,5 +1,10 @@
 from kick.ui.app import Kick
 
-if __name__ == "__main__":
+
+def main():
     app = Kick()
     app.run()
+
+
+if __name__ == "__main__":
+    main()
