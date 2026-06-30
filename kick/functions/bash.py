@@ -48,4 +48,4 @@ async def bash(ctx: RunContext[str], command: str, timeout: int = 30) -> str:
     await reader
     if len(output) > 100:
         output = output[-100:]
-    return f"Exit Code:\n{process.returncode}\n" + "STDOUT: \n".join(output)
+    return f"Exit Code:\n{process.returncode}\n" + "STDOUT: " + "\n".join(output)

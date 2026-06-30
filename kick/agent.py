@@ -5,6 +5,8 @@ from kick.functions.edit import edit
 from kick.functions.ls import ls
 from kick.functions.read import read
 from kick.functions.write import write
+from kick.functions.grep import grep
+from kick.functions.find import find
 
 
 def create_agent(cf):
@@ -23,6 +25,8 @@ def create_agent(cf):
             Tool(write, takes_ctx=True),
             Tool(edit, takes_ctx=True),
             Tool(bash, takes_ctx=True),
+            Tool(grep, takes_ctx=True),
+            Tool(find, takes_ctx=True),
         ],
     )
     return agent

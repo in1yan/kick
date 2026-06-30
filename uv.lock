@@ -1337,7 +1337,7 @@ wheels = [
 ]
 
 [[package]]
-name = "kick"
+name = "kick-agent"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

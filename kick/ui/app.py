@@ -6,7 +6,6 @@ from textual.widgets import (
     Markdown,
 )
 import os
-import system
 from kick.config import config, write_config
 from kick.ui.utils import switch_model
 from kick.ui.screens import ModelSelectionModal
@@ -59,9 +58,9 @@ class Kick(App):
                     response += chunk
                     message_widget.update(f"### Kick\n\n{response}")
                 self.message_history = stream.all_messages()
-        except:
+        except Exception as e:
             message_widget.stop()
-            message_widget.update("> Encountered an error during generation ❌")
+            message_widget.update(f"{type(e).__name__}: {e}")
 
     async def on_input_submitted(self, event: Input.Submitted):
         if event.input.id != "prompt":
