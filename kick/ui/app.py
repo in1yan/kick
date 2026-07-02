@@ -3,13 +3,14 @@ from textual.containers import Vertical, VerticalScroll, Center, Middle
 from textual.widgets import (
     Header,
     Input,
+    TextArea,
     Markdown,
 )
 import os
 from kick.config import config, write_config
 from kick.ui.utils import switch_model
 from kick.ui.screens import ModelSelectionModal
-from kick.ui.widgets import Spinner, Welcome
+from kick.ui.widgets import Spinner, Welcome, Prompt
 from kick.ui.providers import CommandProvider
 from kick.agent import create_agent
 
@@ -62,13 +63,12 @@ class Kick(App):
             message_widget.stop()
             message_widget.update(f"{type(e).__name__}: {e}")
 
-    async def on_input_submitted(self, event: Input.Submitted):
-        if event.input.id != "prompt":
-            return
+    async def on_prompt_submitted(self, event: Prompt.Submitted):
         prompt = event.value
-        event.input.value = ""
+        prompt_widget = self.query_one("#prompt", Prompt)
+        prompt_widget.clear()
         messages = self.query_one("#messages", VerticalScroll)
-        user_message = Markdown(f"> ### {prompt}")
+        user_message = Markdown("> ### " + "\n> ### ".join(prompt.splitlines()))
         assistant_message = Spinner()
         self.current_spinner = assistant_message
         welcome = self.query("#welcome")
@@ -118,11 +118,11 @@ Type a prompt below to begin.
                             """,
                                 id="welcome",
                             )
-            yield Input(placeholder="Build anything cool ..", id="prompt")
+            yield Prompt(placeholder="Build anything cool ..", id="prompt")
 
     async def on_mount(self):
         self.theme = config.ui.theme
-        ip = self.query_one("#prompt", Input)
+        ip = self.query_one("#prompt", Prompt)
         ip.focus()
 
     async def watch_theme(self, theme: str):
@@ -146,7 +146,7 @@ Type a prompt below to begin.
             messages = self.query_one("#messages")
             if self.current_spinner:
                 self.current_spinner.stop()
-            messages.mount(Markdown("> Agent Cancelled"))
+            await messages.mount(Markdown("> Agent Cancelled"))
 
 
 if __name__ == "__main__":

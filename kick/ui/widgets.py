@@ -1,4 +1,5 @@
-from textual.widgets import Static, Markdown
+from textual.widgets import Static, Markdown, TextArea
+from textual.message import Message
 import random
 
 
@@ -39,3 +40,35 @@ class Spinner(Markdown):
 
     def stop(self):
         self.timer.stop()
+
+
+class Prompt(TextArea):
+    class Submitted(Message):
+        def __init__(self, value: str):
+            self.value = value
+            super().__init__()
+
+    async def on_mount(self):
+        self.styles.height = 3
+
+    async def on_key(self, event):
+        if event.key == "enter":
+            event.prevent_default()
+            event.stop()
+            self.post_message(self.Submitted(self.text))
+            return
+        if event.key == "shift+enter":
+            self.insert("\n")
+            event.prevent_default()
+            event.stop()
+            return
+        await super()._on_key(event)
+
+    async def on_text_area_changed(self, event):
+
+        self.styles.height = max(
+            3,
+            min(self.document.line_count, 8),
+        )
+
+        self.refresh(layout=True)
